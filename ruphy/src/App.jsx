@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import './App.css'
-import Home from './components/Home'
+import {BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+
+import {logo} from './assets'
 
 function App() {
   return (
     <div className="App">
+      <h1 className='text-3xl font-bold underline'>Hello World</h1>
       
-      <div className="card">
-      <Home />
-      </div>
-      <p className="text-sm">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
