@@ -9,7 +9,7 @@ function App() {
       <div className="card">
       <Home />
       </div>
-      <p className="read-the-docs">
+      <p className="text-sm">
         Click on the Vite and React logos to learn more
       </p>
     </div>

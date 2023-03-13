@@ -5,7 +5,7 @@ const Home = ()=> {
     const [count, setCount] = useState(0)
     return(
         <div className='container'>
-        <h1>Welcome to Ruphy</h1>
+        <h1 className='text-3xl font-bold underline'>Welcome to Ruphy</h1>
         <hr/>
         <div className='counter-container'>
             <button onClick={()=> setCount((count) => count +1)}>Count is {count}</button>
