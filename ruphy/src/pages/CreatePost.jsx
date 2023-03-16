@@ -8,9 +8,7 @@ import { FormField, Loader } from '../components'
 
 
 
-const generateImage = ()=>{
 
-}
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -24,6 +22,32 @@ const CreatePost = () => {
 
     const handleSubmit = ()=>{
 
+    }
+
+    const generateImage = async ()=>{
+      if(form.prompt) {
+        try {
+            setGeneratingImg(true);
+            const response = await fetch('http://localhost:3000/api/v1/ruphy',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: form.prompt}),
+            })
+
+            const data = await response.json();
+            setForm({ ...form, photo: `data:image/jpeg;base64,
+             ${data.photo}`});
+        } catch (error) {
+            alert(error);
+        } finally {
+            setGeneratingImg(false);
+        }
+      } else{
+        alert("Please enter a prompt");
+      }
     }
     
     const handleChange = (e)=>{
@@ -70,7 +94,7 @@ const CreatePost = () => {
                 {form.photo? (
                     <img 
                     src={form.photo}
-                    alt={photo.prompt}
+                    alt={form.prompt}
                     className='w-full h-full object-contain'/>
                 )
                 :
@@ -92,7 +116,7 @@ const CreatePost = () => {
            <div className='mt-5 flex gap-5'>
             <button 
             type="button"
-            onclick={generateImage}
+            onClick={generateImage}
             className='text-white bg-green-700 font-medium rounded-md
             text-sm w-full sm:w-auto px-5 py-2.5'>
              {generatingImg ? "Generating..." : "Generate"}
