@@ -5,11 +5,11 @@ const FormField = ({labelName, name, type, value, placeholder,
   return (
     <div>
     <div className='flex items-center gap-2 mb-2'>
-        <lable
+        <label
          htmlFor={name}
          className="block text-sm font-medium text-grey-900">
          {labelName}
-        </lable>
+        </label>
         {isSupriseMe && (
             <button className='font-semibold text-xs bg-[#ECECF1]
             py-1 px-2 text-black'
