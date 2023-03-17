@@ -20,10 +20,7 @@ const CreatePost = () => {
     const [ generatingImg, setGeneratingImg ] = useState(false);
     const [ loading, setLoading ] = useState(false);
 
-    const handleSubmit = ()=>{
-
-    }
-
+  
     const generateImage = async ()=>{
       if(form.prompt) {
         try {
@@ -49,6 +46,36 @@ const CreatePost = () => {
         alert("Please enter a prompt");
       }
     }
+
+    const handleSubmit = async (e)=> {
+        e.preventDefault();
+
+        if(form.prompt && form.photo) {
+         setLoading(true);
+
+         try {
+           const response = await fetch('http://localhost:3000/api/v1/post',
+           {
+               method: "POST",
+               headers: {
+                   'Content-Type': 'application/json',
+               }, 
+               body: JSON.stringify(form)
+           })
+          
+           await response.json();
+           navigate('/');
+         } catch (error) {
+           alert(error)
+         } finally{
+           setLoading(false)
+         }
+        } else {
+         alert('Please enter a prompt')
+        }
+        
+   }
+
     
     const handleChange = (e)=>{
      setForm({...form, [e.target.name] : e.target.value});
@@ -129,6 +156,7 @@ const CreatePost = () => {
             <div className='mt-3'>
                 <button 
                 type='button'
+                onClick={handleSubmit}
                 className='mt-3 text-white bg-[#6469ff] font-medium
                 w-full sm:w-auto text-center text-sm px-5 py-2.5 rounded-md'>
                     {loading ? "Sharing..." : "Share with the community"}
