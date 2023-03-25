@@ -1,8 +1,31 @@
-import React from 'react'
+import React from 'react';
 
-const Card = () => {
+import { download } from '../assets';
+import { downloadImage } from '../utils';
+
+const Card = ({ _id, name, prompt, photo }) => {
   return (
-    <div>Card</div>
+    <div className='rounded-xl group relative shadow-card
+    hover:shadow-cardhover card'>
+     <img 
+     src={photo}
+     alt={prompt}
+     className="w-full h-auto rounded-xl object-cover"/>
+     <div className='group-hover:flex flex-col max-h-[94.5%]
+     hidden absolute bottom-0 left-0 right-0 bg-[#10131f]
+     m-2 p-4 rounded-md'>
+      <p className='text-white text-sm overflow-y-auto'>
+        {prompt}
+      </p>
+      <div className='mt-5 flex justify-between items-center gap-2'>
+        <div className='flex items-center gap-2'>
+          <div>
+            {name[0]}
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
   )
 }
 
